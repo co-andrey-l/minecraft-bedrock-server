@@ -1,4 +1,4 @@
-# Minecraft Bedrock Server with Traefik
+# Minecraft Bedrock Server
 This project allows you to run a Minecraft Bedrock Edition server using Docker. The server automatically restarts on failure. Consider this repository as a simple and minimal solution for running a server on something like a raspberry pi 4.
 
 ## Requirements
