@@ -5,34 +5,14 @@ services:
     image: itzg/minecraft-bedrock-server
     container_name: minecraft-bedrock
     ports:
-      - "19132:19132/udp"
+      - "19132:19132/udp"  # Порт для Minecraft Bedrock
     volumes:
       - ./data:/data
     environment:
       EULA: "TRUE"
       GAMEMODE: survival
       DIFFICULTY: normal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.udp.routers.minecraft.entrypoints=minecraft"
-      - "traefik.udp.services.minecraft.loadbalancer.server.port=19132"
-    networks:
-      - traefik_net
+      VIEW_DISTANCE: 8
+      MAX_THREADS: 0
     restart: always
 
-  traefik:
-    image: traefik:v2.10
-    command:
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.minecraft.address=:19132/udp"
-    ports:
-      - "19132:19132/udp"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - traefik_net
-    restart: always
-
-networks:
-  traefik_net:
